@@ -86,7 +86,7 @@ function updateCartQuantity(){
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 }
 
-function addMessage(productId){
+function addMessage(productId,addedMessageTimeout){
 const addedMessage = document.querySelector(
       `.added-to-cart[data-product-id="${productId}"]`
     );
@@ -109,7 +109,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
 
      addToCart(productId,quantity);
      updateCartQuantity();
-    addMessage(productId);
+    addMessage(productId,addedMessageTimeout);
     
   });
 });

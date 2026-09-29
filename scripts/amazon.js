@@ -56,7 +56,7 @@ document.querySelector(".js-products-grid").innerHTML = productHtml;
 
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
   button.addEventListener("click", () => {
-    const productId = button.dataset.productId;  //dara attribute 
+    const productId = button.dataset.productId;  //data attribute 
     const quantitySelector = document.querySelector(
       `.js-quantity-selector[data-product-id="${productId}"]`
     );

@@ -159,13 +159,13 @@ document.querySelectorAll('.save-quantity-link').forEach((link)=>{
     const newQuantity = Number(valueInput.value);
 
     updateQuantity(productId, newQuantity);
+    updateCheckoutCartQuantity();
 
     if (newQuantity > 0) {
       container.querySelector('.quantity-label').textContent = newQuantity;
       container.classList.remove('is-editing-quantity');
     } else {
       container.remove();
-      updateCheckoutCartQuantity();
 
       if (cart.length === 0) {
         showEmptyCart();

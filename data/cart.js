@@ -6,6 +6,17 @@ export let cart = JSON.parse(localStorage.getItem('cart'))||
   productId:"15b6fc6f-327a-4ec4-896f-486349e85a3d",
   quantity: 1
 }];
+export function updateQuantity(productId, newQuantity){
+   if (newQuantity > 0) {
+      const cartItem = cart.find((item) => item.productId === productId);
+      if (cartItem) {
+        cartItem.quantity = newQuantity;
+        saveToStorage();
+      }
+    } else {
+      removeFromCart(productId);
+    }
+}
 
 function saveToStorage(){
   localStorage.setItem('cart',JSON.stringify(cart));

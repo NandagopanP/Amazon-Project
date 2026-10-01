@@ -32,6 +32,35 @@
   align-items: start;
 }
 
+.checkout-grid.is-empty {
+  grid-template-columns: 1fr;
+}
+
+.empty-cart-state {
+  padding: 36px 24px;
+  text-align: center;
+  border: 1px solid rgb(222, 222, 222);
+  border-radius: 4px;
+}
+
+.empty-cart-state h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.empty-cart-state p {
+  margin: 0 0 20px;
+  color: rgb(100, 100, 100);
+}
+
+.empty-cart-link {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+}
+
 @media (max-width: 1000px) {
   .main {
     max-width: 500px;

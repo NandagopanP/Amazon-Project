@@ -98,6 +98,30 @@ console.log(cartHtml)
 
 document.querySelector('.js-order-summary').innerHTML=cartHtml;
 
+function showEmptyCart() {
+  const checkoutGrid = document.querySelector(".checkout-grid");
+  checkoutGrid.classList.add("is-empty");
+  document.querySelector(".payment-summary").hidden = true;
+  document.querySelector(".js-order-summary").innerHTML = `
+    <div class="empty-cart-state">
+      <h2>Your cart is empty</h2>
+      <p>There are no items in your cart yet.</p>
+      <a class="button-primary empty-cart-link" href="amazon.html">Continue shopping</a>
+    </div>
+  `;
+}
+
+if (cart.length === 0) {
+  showEmptyCart();
+}
+
+function updateCheckoutCartQuantity() {
+  const totalQuantity = cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
+  document.querySelector(".js-checkout-cart-quantity").textContent = totalQuantity;
+}
+
+updateCheckoutCartQuantity();
+
 document.querySelectorAll('.js-delete-link').forEach((link)=>{
   link.addEventListener('click',()=>{
     const productId = link.dataset.productId;
@@ -105,6 +129,13 @@ document.querySelectorAll('.js-delete-link').forEach((link)=>{
     
     const container = document.querySelector(`.js-cart-container-${productId}`);
     container.remove();
+    updateCheckoutCartQuantity();
+
+    if (cart.length === 0) {
+      showEmptyCart();
+    }
     
   })
 })
+
+

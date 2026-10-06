@@ -170,8 +170,9 @@ export function renderOrderSummary(){
       const container = document.querySelector(`.js-cart-container-${productId}`);
       const valueInput = container.querySelector(".quantity-input");
       const newQuantity = Number(valueInput.value);
-
       updateQuantity(productId, newQuantity);
+      renderOrderSummary();
+      renderPaymentSummary();
       updateCheckoutCartQuantity();
 
       if (newQuantity > 0) {

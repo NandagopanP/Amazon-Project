@@ -1,18 +1,15 @@
-class Cart{
- cartItems;
- #localStorageKey;
+export class Cart {
+  cartItems;
+  #localStorageKey;
 
- constructor(localStorageKey){
-//const cart = new Cart();  //instance of a class
-this.#localStorageKey = 'cart-oop';
+  constructor(localStorageKey) {
+    this.#localStorageKey = localStorageKey;
+    this.loadFromStorage();
+  }
 
-this.#loadFromStorage();
-}
-
- #loadFromStorage() {
+  loadFromStorage() {
     this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [
       {
-        //this gives us the object that contains this function
         productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
         quantity: 2,
         deliveryOptionId: "1",
@@ -23,12 +20,11 @@ this.#loadFromStorage();
         deliveryOptionId: "2",
       },
     ];
-  };
-
-   saveToStorage() {
-    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
+  saveToStorage() {
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
+  }
 
   addToCart(productId, quantity) {
     let matchingItem;
@@ -50,7 +46,7 @@ this.#loadFromStorage();
     this.saveToStorage();
   }
 
-   removeFromCart(productId) {
+  removeFromCart(productId) {
     const newCart = [];
 
     this.cartItems.forEach((cartItem) => {
@@ -96,10 +92,5 @@ this.#loadFromStorage();
   }
 }
 
-const cart = new Cart('cart-oop');
-const businessCart = new Cart('business-cart');
-
-console.log(cart);
-console.log(businessCart)
-
-
+export const cart = new Cart("cart");
+export const businessCart = new Cart("business-cart");

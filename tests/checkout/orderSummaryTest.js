@@ -1,5 +1,5 @@
 import { renderOrderSummary } from "../../scripts/checkout/orderSummary.js";
-import { loadFromStorage, cart } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 
 describe('test suite: renderOrderSummary', () => {
 
@@ -22,7 +22,7 @@ describe('test suite: renderOrderSummary', () => {
       deliveryOptionId: "2"
     }]));
     spyOn(localStorage, 'setItem');
-    loadFromStorage();
+    cart.loadFromStorage();
     renderOrderSummary();
   });
 
@@ -39,7 +39,7 @@ describe('test suite: renderOrderSummary', () => {
     expect(document.querySelector(`.js-cart-container-${productid2}`)).not.toBeNull();
     expect(document.querySelector('.js-checkout-cart-quantity').textContent).toEqual('1');
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-    expect(cart.length).toEqual(1);
-    expect(cart[0].productId).toEqual(productid2);
+    expect(cart.cartItems.length).toEqual(1);
+    expect(cart.cartItems[0].productId).toEqual(productid2);
   });
 });

@@ -1,9 +1,4 @@
-import {
-  cart,
-  removeFromCart,
-  updateDeliveryOption,
-  updateQuantity,
-} from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
@@ -13,7 +8,7 @@ import { renderPaymentSummary } from "./paymentSummary.js";
 export function renderOrderSummary(){
   let cartHtml = "";
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     const productId = cartItem.productId;
 
     const matchingProduct = getProduct(productId);
@@ -115,12 +110,12 @@ export function renderOrderSummary(){
     `;
   }
 
-  if (cart.length === 0) {
+  if (cart.cartItems.length === 0) {
     showEmptyCart();
   }
 
   function updateCheckoutCartQuantity() {
-    const totalQuantity = cart.reduce(
+    const totalQuantity = cart.cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,
       0,
     );
@@ -134,7 +129,7 @@ export function renderOrderSummary(){
     input.addEventListener("change", () => {
       const productId = input.dataset.productId;
       const deliveryOptionId = input.value;
-      updateDeliveryOption(productId, deliveryOptionId);
+      cart.updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
       renderPaymentSummary();
     });
@@ -143,14 +138,14 @@ export function renderOrderSummary(){
   document.querySelectorAll(".js-delete-link").forEach((link) => {
     link.addEventListener("click", () => {
       const productId = link.dataset.productId;
-      removeFromCart(productId);
+      cart.removeFromCart(productId);
 
       const container = document.querySelector(`.js-cart-container-${productId}`);
       container.remove();
       renderPaymentSummary();
       updateCheckoutCartQuantity();
 
-      if (cart.length === 0) {
+      if (cart.cartItems.length === 0) {
         showEmptyCart();
       }
     });
@@ -170,7 +165,7 @@ export function renderOrderSummary(){
       const container = document.querySelector(`.js-cart-container-${productId}`);
       const valueInput = container.querySelector(".quantity-input");
       const newQuantity = Number(valueInput.value);
-      updateQuantity(productId, newQuantity);
+      cart.updateQuantity(productId, newQuantity);
       renderOrderSummary();
       renderPaymentSummary();
       updateCheckoutCartQuantity();
@@ -181,11 +176,10 @@ export function renderOrderSummary(){
       } else {
         container.remove();
 
-        if (cart.length === 0) {
+        if (cart.cartItems.length === 0) {
           showEmptyCart();
         }
       }
     });
   });
 }
-

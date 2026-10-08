@@ -1,16 +1,16 @@
 class Cart{
  cartItems;
- localStorageKey;
+ #localStorageKey;
 
  constructor(localStorageKey){
 //const cart = new Cart();  //instance of a class
-this.localStorageKey = 'cart-oop';
+this.#localStorageKey = 'cart-oop';
 
-this.loadFromStorage();
+this.#loadFromStorage();
 }
 
- loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)) || [
+ #loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [
       {
         //this gives us the object that contains this function
         productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -26,7 +26,7 @@ this.loadFromStorage();
   };
 
    saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
   }
 
 
@@ -98,5 +98,8 @@ this.loadFromStorage();
 
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('business-cart');
+
+console.log(cart);
+console.log(businessCart)
 
 

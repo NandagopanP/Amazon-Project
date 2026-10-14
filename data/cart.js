@@ -77,3 +77,17 @@ export function removeFromCart(productId){
   cart = newCart
   saveToStorage();
 }
+
+export function loadCart(fn){
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', ()=>{
+   
+  console.log(xhr.response);
+
+fn(); //Callback -  A function to run in the future
+  });
+
+  xhr.open('GET','https://supersimplebackend.dev/cart');
+  xhr.send();
+}

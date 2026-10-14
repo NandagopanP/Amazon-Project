@@ -15,7 +15,7 @@ Promise.all([
 }),
 new Promise((resolve)=>{
    loadCart(()=>{
-    resolve(value2);
+    resolve('value2');
    }); 
   })
 
